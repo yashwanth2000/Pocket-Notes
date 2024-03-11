@@ -52,7 +52,7 @@
 }
 
 .selected {
-  border-color: #979797;
+  border: 2px solid #000;
 }
 
 .inputGroup {

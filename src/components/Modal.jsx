@@ -1,19 +1,22 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
 
-const Modal = ({ setShowModal }) => {
-  const [groupName, setGroupName] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
-  const [error, setError] = useState("");
+const Modal = ({
+  setShowModal,
+  addGroup,
+  groupName,
+  selectedColor,
+  handleChangeGroupName,
+  handleColorSelect,
+}) => {
   const colors = [
-    "#d9b3ff",
-    "#bae1ff",
-    "#a0e7e5",
-    "#ffdfba",
-    "#ffb3ba",
-    "#b3b3ff",
+    "#0047FF",
+    "#43E6FC",
+    "#6691FF",
+    "#B38BFA",
+    "#F19576",
+    "#FF79F2",
   ];
-  
   const modalRef = useRef();
 
   useEffect(() => {
@@ -22,32 +25,17 @@ const Modal = ({ setShowModal }) => {
         setShowModal(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [setShowModal]);
 
-  const handleChangeGroupName = (event) => {
-    setGroupName(event.target.value);
-    setError("");
-  };
-
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!groupName.trim()) {
-      setError("Please enter a group name.");
-      return;
-    }
-    setGroupName("");
-    setSelectedColor("");
-    setShowModal(false);
+    addGroup();
   };
 
   return (
@@ -66,7 +54,6 @@ const Modal = ({ setShowModal }) => {
           placeholder="Enter group name"
           autoComplete="off"
         />
-        {error && <div className={styles.error}>{error}</div>}
         <div className={styles.colorContainer}>
           <label htmlFor="group-color" className={styles.groupColor}>
             Choose Color
@@ -90,6 +77,6 @@ const Modal = ({ setShowModal }) => {
       </form>
     </div>
   );
-}
+};
 
 export default Modal;

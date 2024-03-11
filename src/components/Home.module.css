@@ -14,14 +14,6 @@
   width: 25%;
 }
 
-.left h1 {
-  color: #000;
-  font-size: 2rem;
-  padding: 1.5rem;
-  margin-left: 50px;
-  font-weight: 600;
-}
-
 .right {
   flex: 1;
   display: flex;

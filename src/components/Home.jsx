@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <div className={styles.main}>
       <div className={styles.left}>
-        <h1>Pocket Notes</h1>
         <NotesGroup />
       </div>
       <div className={styles.right}>
