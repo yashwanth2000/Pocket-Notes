@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NotesGroup from "./NotesGroup";
+import NotesGroup ,{getGroupInitials} from "./NotesGroup";
 import NotesArea from "./NotesArea";
 import notes from "../assets/notes.png";
 import lock from "../assets/lock.png";
@@ -15,7 +15,7 @@ const Home = () => {
       </div>
       <div className={styles.right}>
         {selectedGroup ? (
-          <NotesArea group={selectedGroup} />
+          <NotesArea group={selectedGroup} getGroupInitials={getGroupInitials}/>
         ) : (
           <>
             <div className={styles.description}>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./NotesArea.module.css";
 import arrow from "../assets/arrow.png";
 
-const NotesArea = ({ group }) => {
+const NotesArea = ({ group, getGroupInitials }) => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
 
@@ -22,26 +22,34 @@ const NotesArea = ({ group }) => {
   return group ? (
     <div className={styles.noteContainer}>
       <div className={styles.noteHeader}>
+        <div
+          className={styles.groupCircle}
+          style={{ backgroundColor: group.color }}
+        >
+          {getGroupInitials(group.name)}
+        </div>
         <div className={styles.noteHeaderText}>{group.name}</div>
       </div>
       <div className={styles.noteBody}>
-        {notes.map((note, index) => (
-          <div key={index}>
-            <p className={styles.noteText}>{note.text}</p>
-            <p className={styles.noteTimestamp}>{note.timestamp}</p>
-          </div>
-        ))}
+        <div className={styles.notes}>
+          {notes.map((note, index) => (
+            <div key={index}>
+              <p className={styles.noteText}>{note.text}</p>
+              <p className={styles.noteTimestamp}>{note.timestamp}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.noteInput}>
         <textarea
           value={newNote}
           onChange={(e) => setNewNote(e.target.value)}
           placeholder="Enter your text here..."
-          rows={10}
-          cols={150}
+          rows={6}
+          cols={100}
         />
         <div className={styles.arrowButton} onClick={handleArrowClick}>
-          <img src={arrow} alt="arrow" />
+          <img src={arrow} alt="arrow"/>
         </div>
       </div>
     </div>

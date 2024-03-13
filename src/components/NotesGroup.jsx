@@ -1,6 +1,25 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import styles from "./NotesGroup.module.css";
+
+export function getGroupInitials(name) {
+  if (name == null) {
+    throw new Error("Group name is null");
+  }
+
+  const initials = name
+    .trim()
+    .split(" ")
+    .map((word) => {
+      if (word == null) {
+        throw new Error("Group name contains null word");
+      }
+
+      return word.charAt(0).toUpperCase();
+    });
+
+  return initials.join("");
+}
 const NotesGroup = ({ setSelectedGroup }) => {
   const [showModal, setShowModal] = useState(false);
   const [groups, setGroups] = useState([]);
@@ -31,15 +50,6 @@ const NotesGroup = ({ setSelectedGroup }) => {
   const handleChangeGroupName = (event) => setGroupName(event.target.value);
 
   const handleColorSelect = (color) => setSelectedColor(color);
-
-  const getGroupInitials = (name) =>
-    name.includes(" ")
-      ? name
-          .split(" ")
-          .map((word) => word.charAt(0))
-          .join("")
-          .toUpperCase()
-      : name.charAt(0).toUpperCase();
 
   return (
     <div className={styles.container}>
