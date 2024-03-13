@@ -1,17 +1,21 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import styles from "./NotesGroup.module.css";
-
-const NotesGroup = () => {
+const NotesGroup = ({ setSelectedGroup }) => {
   const [showModal, setShowModal] = useState(false);
   const [groups, setGroups] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
 
   const addGroup = () => {
-    const normalizedGroupName = groupName.trim().replace(/\s/g, "").toLowerCase();
+    const normalizedGroupName = groupName
+      .trim()
+      .replace(/\s/g, "")
+      .toLowerCase();
     const groupExists = groups.some(
-      (group) => group.name.trim().replace(/\s/g, "").toLowerCase() === normalizedGroupName
+      (group) =>
+        group.name.trim().replace(/\s/g, "").toLowerCase() ===
+        normalizedGroupName
     );
 
     if (groupName.trim() && selectedColor && !groupExists) {
@@ -30,7 +34,11 @@ const NotesGroup = () => {
 
   const getGroupInitials = (name) =>
     name.includes(" ")
-      ? name.split(" ").map((word) => word.charAt(0)).join("").toUpperCase()
+      ? name
+          .split(" ")
+          .map((word) => word.charAt(0))
+          .join("")
+          .toUpperCase()
       : name.charAt(0).toUpperCase();
 
   return (
@@ -39,7 +47,11 @@ const NotesGroup = () => {
       <div className={styles.groupContainer}>
         <div className={styles.groupWrapper}>
           {groups.map((group, index) => (
-            <div key={index} className={styles.groupItem}>
+            <div
+              key={index}
+              className={styles.groupItem}
+              onClick={() => setSelectedGroup(group)}
+            >
               <div
                 className={styles.groupCircle}
                 style={{ backgroundColor: group.color }}
