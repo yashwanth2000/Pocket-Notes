@@ -9,6 +9,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   width: 30rem;
   font-family: "Roboto", sans-serif;
+  z-index: 9999;
 }
 
 .error {

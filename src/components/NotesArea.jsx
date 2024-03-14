@@ -31,25 +31,28 @@ const NotesArea = ({ group, getGroupInitials }) => {
         <div className={styles.noteHeaderText}>{group.name}</div>
       </div>
       <div className={styles.noteBody}>
-        <div className={styles.notes}>
-          {notes.map((note, index) => (
-            <div key={index}>
-              <p className={styles.noteText}>{note.text}</p>
-              <p className={styles.noteTimestamp}>{note.timestamp}</p>
-            </div>
-          ))}
-        </div>
+        {notes.map((note, index) => (
+          <div key={index} className={styles.notes}>
+            <p className={styles.noteText}>{note.text}</p>
+            <h4 className={styles.noteTimestamp}>{note.timestamp}</h4>
+          </div>
+        ))}
       </div>
       <div className={styles.noteInput}>
-        <textarea
-          value={newNote}
-          onChange={(e) => setNewNote(e.target.value)}
-          placeholder="Enter your text here..."
-          rows={6}
-          cols={100}
-        />
-        <div className={styles.arrowButton} onClick={handleArrowClick}>
-          <img src={arrow} alt="arrow"/>
+        <div className={styles.inputWrapper}>
+          <textarea
+            value={newNote}
+            onChange={(e) => setNewNote(e.target.value)}
+            placeholder="Enter your text here..."
+            rows={10}
+            cols={130}
+          />
+          <img
+            src={arrow}
+            alt="arrow"
+            onClick={handleArrowClick}
+            className={styles.arrowIcon}
+          />
         </div>
       </div>
     </div>
