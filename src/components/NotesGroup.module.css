@@ -7,7 +7,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000;
+  background: #fff;
   border-radius: 5px;
 }
 .container {

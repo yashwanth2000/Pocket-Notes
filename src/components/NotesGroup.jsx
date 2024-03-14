@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import styles from "./NotesGroup.module.css";
 
@@ -20,11 +20,19 @@ export function getGroupInitials(name) {
 
   return initials.join("");
 }
+
 const NotesGroup = ({ setSelectedGroup }) => {
   const [showModal, setShowModal] = useState(false);
   const [groups, setGroups] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+
+  useEffect(() => {
+    const savedGroups = localStorage.getItem("groups");
+    if (savedGroups) {
+      setGroups(JSON.parse(savedGroups));
+    }
+  }, []);
 
   const addGroup = () => {
     const normalizedGroupName = groupName
@@ -38,7 +46,9 @@ const NotesGroup = ({ setSelectedGroup }) => {
     );
 
     if (groupName.trim() && selectedColor && !groupExists) {
-      setGroups([...groups, { name: groupName, color: selectedColor }]);
+      const newGroup = { name: groupName, color: selectedColor };
+      setGroups([...groups, newGroup]);
+      localStorage.setItem("groups", JSON.stringify([...groups, newGroup]));
       setGroupName("");
       setSelectedColor("");
       setShowModal(false);

@@ -38,10 +38,12 @@
   font-weight: 500;
 }
 
-.noteBody {
+.noteBodyContainer {
   flex-grow: 1;
   overflow-y: auto;
-  position: relative; 
+}
+
+.noteBody {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,10 +72,6 @@
 }
 
 .noteInput {
-  position: absolute;
-  bottom: 0; 
-  left: 0;
-  right: 0;
   background-color: #001f8b;
   padding: 18px;
   border-radius: 3px;
