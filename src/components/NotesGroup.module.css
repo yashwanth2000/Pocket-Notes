@@ -21,6 +21,7 @@
   color: #000;
   font-size: 2rem;
   font-weight: 500;
+  animation: fadeInUp 1s forwards;
 }
 
 .groupWrapper {
@@ -31,7 +32,14 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  padding: 12px 20px;
+  transition: background-color 0.3s;
 }
+
+.groupItem.selected {
+  background-color: #e6f2ff;
+  border-radius: 5px;
+ }
 
 .groupCircle {
   width: 40px;
@@ -43,6 +51,7 @@
   color: #fff;
   font-weight: 500;
   margin-bottom: 20px;
+  
 }
 
 .groupName {
@@ -52,27 +61,35 @@
   font-size: 20px;
   margin-bottom: 20px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.plus {
-  position: fixed;
-  bottom: 1rem;
-  left: 22%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  width: 50px;
-  height: 50px;
-  background-color: #16008b;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 40px;
+.groupName:hover {
+  transform: scale(1.05);
 }
 
 .groupContainer {
   height: 600px;
   padding: 5px;
   overflow-y: auto;
+  position: relative;
+  animation: slideInLeft 1s forwards;
 }
+
+.plus {
+  position: absolute; 
+  bottom: 20px; 
+  right: 20px; 
+  width: 50px;
+  height: 50px;
+  background-color: #16008b;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 40px;
+  z-index: 9999;
+  animation: zoomIn 1s forwards;
+}
+
 
 .groupContainer::-webkit-scrollbar-track {
   background: #d9d9d9;
@@ -82,4 +99,96 @@
 .groupContainer::-webkit-scrollbar-thumb {
   background: #000;
   border-radius: 5px;
+}
+
+.successMessage {
+  position: fixed;
+  top: 20px;
+  right: 3%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  animation: fadeInOut 3s forwards;
+}
+
+.errorMessage {
+  position: fixed;
+  top: 10px;
+  right: 2%;
+  transform: translateX(-50%);
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  animation: shake 0.5s forwards;
+}
+
+@media (min-width: 769px) {
+  .plus {
+    left: 21%;
+    transform: translateX(-50%);
+  }
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
 }

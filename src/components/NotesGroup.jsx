@@ -14,7 +14,6 @@ export function getGroupInitials(name) {
       if (word == null) {
         throw new Error("Group name contains null word");
       }
-
       return word.charAt(0).toUpperCase();
     });
 
@@ -26,6 +25,9 @@ const NotesGroup = ({ setSelectedGroup }) => {
   const [groups, setGroups] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+  const [selectedGroupState, setSelectedGroupState] = useState(null); // Updated state variable name
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const savedGroups = localStorage.getItem("groups");
@@ -52,8 +54,11 @@ const NotesGroup = ({ setSelectedGroup }) => {
       setGroupName("");
       setSelectedColor("");
       setShowModal(false);
+      setSuccessMessage("Group created successfully!");
+      setTimeout(() => setSuccessMessage(""), 3000);
     } else if (groupExists) {
-      alert("Group name already exists. Please choose a different name.");
+      setErrorMessage("Group name already exists!");
+      setTimeout(() => setErrorMessage(""), 3000);
     }
   };
 
@@ -64,13 +69,18 @@ const NotesGroup = ({ setSelectedGroup }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Pocket Notes</h1>
+      {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
+      {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
       <div className={styles.groupContainer}>
         <div className={styles.groupWrapper}>
           {groups.map((group, index) => (
             <div
               key={index}
-              className={styles.groupItem}
-              onClick={() => setSelectedGroup(group)}
+              className={`${styles.groupItem} ${selectedGroupState === group ? styles.selected : ""}`}
+              onClick={() => {
+                setSelectedGroup(group);
+                setSelectedGroupState(group);
+              }}
             >
               <div
                 className={styles.groupCircle}
