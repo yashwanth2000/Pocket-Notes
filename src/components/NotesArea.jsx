@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import styles from "./NotesArea.module.css";
 import arrow from "../assets/arrow.png";
 import arrow2 from "../assets/arrow2.png";
+import backBtn from "../assets/backBtn.png";
 
-const NotesArea = ({ group, getGroupInitials }) => {
+const NotesArea = ({ group, getGroupInitials, setSelectedGroup }) => {
   const [allNotes, setAllNotes] = useState({});
   const [newNote, setNewNote] = useState("");
   const [isTextPresent, setIsTextPresent] = useState(false);
@@ -44,6 +45,12 @@ const NotesArea = ({ group, getGroupInitials }) => {
   return (
     <div className={styles.noteContainer}>
       <div className={styles.noteHeader}>
+        <img
+          className={styles.backButton}
+          onClick={() => setSelectedGroup(null)}
+          src={backBtn}
+          alt="back button"
+        />
         <div
           className={styles.groupCircle}
           style={{ backgroundColor: group.color }}

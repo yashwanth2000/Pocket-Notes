@@ -100,3 +100,86 @@
   width: 30px;
   height: 30px;
 }
+
+@media (max-width: 768px) {
+  .noteContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .noteHeader {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .backButton {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .noteHeaderText {
+    margin-left: 20px;
+  }
+
+  .noteBodyContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  .noteBody {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .noteInput {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputWrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .noteInput textarea {
+    width: calc(100% - 60px);
+    height: 50px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    resize: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+
+  .arrowIcon {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+  }
+
+  
+}
+
+@media (min-width: 769px) {
+  .backButton {
+    display: none;
+  }
+}
