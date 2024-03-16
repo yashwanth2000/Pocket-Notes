@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className={styles.main}>
       {isSmallScreen ? (
-        <div className={styles.fullscreen}>
+        <div>
           {selectedGroup ? (
             <NotesArea
               group={selectedGroup}

@@ -25,9 +25,10 @@ const NotesGroup = ({ setSelectedGroup }) => {
   const [groups, setGroups] = useState([]);
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
-  const [selectedGroupState, setSelectedGroupState] = useState(null); // Updated state variable name
+  const [selectedGroupState, setSelectedGroupState] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const savedGroups = localStorage.getItem("groups");
@@ -54,8 +55,12 @@ const NotesGroup = ({ setSelectedGroup }) => {
       setGroupName("");
       setSelectedColor("");
       setShowModal(false);
-      setSuccessMessage("Group created successfully!");
+      setSuccessMessage("Group Added!");
       setTimeout(() => setSuccessMessage(""), 3000);
+    } else if (!groupName.trim() || !selectedColor) {
+      setErrorMessage("");
+      setShowWarning(true);
+      setTimeout(() => setShowWarning(false), 3000);
     } else if (groupExists) {
       setErrorMessage("Group name already exists!");
       setTimeout(() => setErrorMessage(""), 3000);
@@ -69,14 +74,23 @@ const NotesGroup = ({ setSelectedGroup }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Pocket Notes</h1>
-      {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
-      {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+      {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessage}>{errorMessage}</div>
+      )}
+      {showWarning && (
+        <div className={styles.warningMessage}>Select both name and color!</div>
+      )}
       <div className={styles.groupContainer}>
         <div className={styles.groupWrapper}>
           {groups.map((group, index) => (
             <div
               key={index}
-              className={`${styles.groupItem} ${selectedGroupState === group ? styles.selected : ""}`}
+              className={`${styles.groupItem} ${
+                selectedGroupState === group ? styles.selected : ""
+              }`}
               onClick={() => {
                 setSelectedGroup(group);
                 setSelectedGroupState(group);

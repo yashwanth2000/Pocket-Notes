@@ -79,7 +79,7 @@
 .plus {
   position: absolute; 
   bottom: 20px; 
-  right: 20px; 
+  right: 10px; 
   width: 50px;
   height: 50px;
   background-color: #16008b;
@@ -125,13 +125,17 @@
   animation: shake 0.5s forwards;
 }
 
-@media (min-width: 769px) {
-  .plus {
-    left: 21%;
-    transform: translateX(-50%);
-  }
+.warningMessage {
+  position: fixed;
+  top: 20px;
+  right: 3%;
+  transform: translateX(-50%);
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  animation: fadeAndScale 0.5s forwards ;
 }
-
 
 @keyframes fadeInUp {
   from {
@@ -190,5 +194,43 @@
   }
   20%, 40%, 60%, 80% {
     transform: translateX(10px);
+  }
+}
+
+@keyframes fadeAndScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .plus {
+    position: absolute;
+    bottom: 20px;
+    left: 15%;
+  }
+  .groupCircle {
+    width: 40px; 
+    height: 40px;
+    font-size: 16px; 
+  }
+}
+
+
+@media (min-width: 1000px) {
+  .groupCircle {
+    width: 40px; 
+    height: 40px;
+    font-size: 16px; 
+  }
+  .plus {
+    position: absolute;
+    bottom: 20px;
+    left: 20%;
   }
 }
