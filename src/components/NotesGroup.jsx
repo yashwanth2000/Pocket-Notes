@@ -26,9 +26,6 @@ const NotesGroup = ({ setSelectedGroup }) => {
   const [groupName, setGroupName] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedGroupState, setSelectedGroupState] = useState(null);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const savedGroups = localStorage.getItem("groups");
@@ -55,15 +52,10 @@ const NotesGroup = ({ setSelectedGroup }) => {
       setGroupName("");
       setSelectedColor("");
       setShowModal(false);
-      setSuccessMessage("Group Added!");
-      setTimeout(() => setSuccessMessage(""), 3000);
     } else if (!groupName.trim() || !selectedColor) {
-      setErrorMessage("");
-      setShowWarning(true);
-      setTimeout(() => setShowWarning(false), 3000);
+      setShowModal(false);
     } else if (groupExists) {
-      setErrorMessage("Group name already exists!");
-      setTimeout(() => setErrorMessage(""), 3000);
+      setShowModal(false);
     }
   };
 
@@ -74,15 +66,6 @@ const NotesGroup = ({ setSelectedGroup }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Pocket Notes</h1>
-      {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className={styles.errorMessage}>{errorMessage}</div>
-      )}
-      {showWarning && (
-        <div className={styles.warningMessage}>Select both name and color!</div>
-      )}
       <div className={styles.groupContainer}>
         <div className={styles.groupWrapper}>
           {groups.map((group, index) => (
@@ -118,6 +101,7 @@ const NotesGroup = ({ setSelectedGroup }) => {
           selectedColor={selectedColor}
           handleChangeGroupName={handleChangeGroupName}
           handleColorSelect={handleColorSelect}
+          groups={groups}
         />
       )}
     </div>

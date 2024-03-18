@@ -39,7 +39,7 @@
 .groupItem.selected {
   background-color: #e6f2ff;
   border-radius: 5px;
- }
+}
 
 .groupCircle {
   width: 40px;
@@ -51,7 +51,6 @@
   color: #fff;
   font-weight: 500;
   margin-bottom: 20px;
-  
 }
 
 .groupName {
@@ -77,9 +76,9 @@
 }
 
 .plus {
-  position: absolute; 
-  bottom: 20px; 
-  right: 10px; 
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
   width: 50px;
   height: 50px;
   background-color: #16008b;
@@ -90,7 +89,6 @@
   animation: zoomIn 1s forwards;
 }
 
-
 .groupContainer::-webkit-scrollbar-track {
   background: #d9d9d9;
   border-radius: 5px;
@@ -99,42 +97,6 @@
 .groupContainer::-webkit-scrollbar-thumb {
   background: #000;
   border-radius: 5px;
-}
-
-.successMessage {
-  position: fixed;
-  top: 20px;
-  right: 3%;
-  transform: translateX(-50%);
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  animation: fadeInOut 3s forwards;
-}
-
-.errorMessage {
-  position: fixed;
-  top: 10px;
-  right: 2%;
-  transform: translateX(-50%);
-  background-color: #f44336;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  animation: shake 0.5s forwards;
-}
-
-.warningMessage {
-  position: fixed;
-  top: 20px;
-  right: 3%;
-  transform: translateX(-50%);
-  background-color: #ff9800;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  animation: fadeAndScale 0.5s forwards ;
 }
 
 @keyframes fadeInUp {
@@ -170,44 +132,6 @@
   }
 }
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-10px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(10px);
-  }
-}
-
-@keyframes fadeAndScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @media (min-width: 768px) {
   .plus {
     position: absolute;
@@ -215,18 +139,17 @@
     left: 15%;
   }
   .groupCircle {
-    width: 40px; 
+    width: 40px;
     height: 40px;
-    font-size: 16px; 
+    font-size: 16px;
   }
 }
 
-
 @media (min-width: 1000px) {
   .groupCircle {
-    width: 40px; 
+    width: 40px;
     height: 40px;
-    font-size: 16px; 
+    font-size: 16px;
   }
   .plus {
     position: absolute;
