@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./NotesArea.module.css";
 import arrow from "../assets/arrow.png";
 import arrow2 from "../assets/arrow2.png";
 import backBtn from "../assets/backBtn.png";
 
-const NotesArea = ({ group, getGroupInitials, setSelectedGroup }) => {
+const NotesArea = ({ group, getGroupInitials, setSelectedGroup, isSmallScreen }) => {
+  console.log("Rendering NotesArea component");
   const [allNotes, setAllNotes] = useState({});
   const [newNote, setNewNote] = useState("");
   const [isTextPresent, setIsTextPresent] = useState(false);
@@ -16,7 +17,7 @@ const NotesArea = ({ group, getGroupInitials, setSelectedGroup }) => {
     }
   }, []);
 
-  const handleArrowClick = () => {
+  const handleArrowClick = useCallback(() => {
     if (newNote.trim()) {
       const currentDate = new Date();
       const timestamp = `${currentDate.toLocaleDateString("en-US", {
@@ -38,19 +39,21 @@ const NotesArea = ({ group, getGroupInitials, setSelectedGroup }) => {
       setNewNote("");
       setIsTextPresent(false);
     }
-  };
+  }, [newNote, allNotes, group.name]);
 
   const groupNotes = allNotes[group.name] || [];
 
   return (
     <div className={styles.noteContainer}>
       <div className={styles.noteHeader}>
-        <img
-          className={styles.backButton}
-          onClick={() => setSelectedGroup(null)}
-          src={backBtn}
-          alt="back button"
-        />
+        {isSmallScreen && (
+          <img
+            className={styles.backButton}
+            onClick={() => setSelectedGroup(null)}
+            src={backBtn}
+            alt="back button"
+          />
+        )}
         <div
           className={styles.groupCircle}
           style={{ backgroundColor: group.color }}

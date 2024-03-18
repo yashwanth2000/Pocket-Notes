@@ -24,6 +24,15 @@
   animation: fadeInUp 1s forwards;
 }
 
+.groupContainer {
+  height: 600px;
+  padding: 5px;
+  overflow-y: auto;
+  position: relative;
+  animation: slideInLeft 1s forwards;
+  cursor: pointer;
+}
+
 .groupWrapper {
   margin: 30px 20px;
 }
@@ -59,7 +68,7 @@
   color: #000;
   font-size: 20px;
   margin-bottom: 20px;
-  cursor: pointer;
+ 
   transition: transform 0.3s ease;
 }
 
@@ -67,13 +76,6 @@
   transform: scale(1.05);
 }
 
-.groupContainer {
-  height: 600px;
-  padding: 5px;
-  overflow-y: auto;
-  position: relative;
-  animation: slideInLeft 1s forwards;
-}
 
 .plus {
   position: absolute;

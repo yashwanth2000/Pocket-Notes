@@ -7,40 +7,32 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  const handleResize = () => {
+    const isSmall = window.innerWidth < 768;
+    setIsSmallScreen(isSmall);
+    if (!isSmall) setSelectedGroup(null);
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
-    };
-
     window.addEventListener("resize", handleResize);
-    handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleGroupSelect = (group) => {
-    setSelectedGroup(group);
-  };
 
   return (
     <div className={styles.main}>
       {isSmallScreen ? (
-        <div>
-          {selectedGroup ? (
-            <NotesArea
-              group={selectedGroup}
-              getGroupInitials={getGroupInitials}
-              setSelectedGroup={setSelectedGroup}
-            />
-          ) : (
-            <NotesGroup
-              setSelectedGroup={handleGroupSelect}
-              isSmallScreen={isSmallScreen}
-            />
-          )}
-        </div>
+        selectedGroup ? (
+          <NotesArea
+            group={selectedGroup}
+            getGroupInitials={getGroupInitials}
+            setSelectedGroup={setSelectedGroup}
+            isSmallScreen
+          />
+        ) : (
+          <NotesGroup setSelectedGroup={setSelectedGroup} isSmallScreen />
+        )
       ) : (
         <>
           <div className={styles.left}>
@@ -54,23 +46,7 @@ const Home = () => {
                 setSelectedGroup={setSelectedGroup}
               />
             ) : (
-              <>
-                <div className={styles.description}>
-                  <img src={notes} alt="notes" />
-                  <h2>Pocket Notes</h2>
-                  <p>
-                    Send and receive messages without keeping your phone
-                    online.
-                    <br />
-                    Use Pocket Notes on up to 4 linked devices and 1 mobile
-                    phone
-                  </p>
-                </div>
-                <div className={styles["encryption-note"]}>
-                  <img src={lock} alt="lock" />
-                  End-to-End encrypted
-                </div>
-              </>
+              <Content />
             )}
           </div>
         </>
@@ -78,5 +54,23 @@ const Home = () => {
     </div>
   );
 };
+
+const Content = () => (
+  <>
+    <div className={styles.description}>
+      <img src={notes} alt="notes" />
+      <h2>Pocket Notes</h2>
+      <p>
+        Send and receive messages without keeping your phone online.
+        <br />
+        Use Pocket Notes on up to 4 linked devices and 1 mobile phone
+      </p>
+    </div>
+    <div className={styles["encryption-note"]}>
+      <img src={lock} alt="lock" />
+      End-to-End encrypted
+    </div>
+  </>
+);
 
 export default Home;

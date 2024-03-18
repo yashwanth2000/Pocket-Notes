@@ -6,7 +6,6 @@ export function getGroupInitials(name) {
   if (name == null) {
     throw new Error("Group name is null");
   }
-
   const initials = name
     .trim()
     .split(" ")
@@ -16,7 +15,6 @@ export function getGroupInitials(name) {
       }
       return word.charAt(0).toUpperCase();
     });
-
   return initials.join("");
 }
 
@@ -35,14 +33,9 @@ const NotesGroup = ({ setSelectedGroup }) => {
   }, []);
 
   const addGroup = () => {
-    const normalizedGroupName = groupName
-      .trim()
-      .replace(/\s/g, "")
-      .toLowerCase();
+    const normalizedGroupName = groupName.trim().toLowerCase();
     const groupExists = groups.some(
-      (group) =>
-        group.name.trim().replace(/\s/g, "").toLowerCase() ===
-        normalizedGroupName
+      (group) => group.name.trim().toLowerCase() === normalizedGroupName
     );
 
     if (groupName.trim() && selectedColor && !groupExists) {
@@ -52,15 +45,12 @@ const NotesGroup = ({ setSelectedGroup }) => {
       setGroupName("");
       setSelectedColor("");
       setShowModal(false);
-    } else if (!groupName.trim() || !selectedColor) {
-      setShowModal(false);
-    } else if (groupExists) {
+    } else {
       setShowModal(false);
     }
   };
 
   const handleChangeGroupName = (event) => setGroupName(event.target.value);
-
   const handleColorSelect = (color) => setSelectedColor(color);
 
   return (

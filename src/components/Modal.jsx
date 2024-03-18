@@ -20,7 +20,6 @@ const Modal = ({
   ];
   const modalRef = useRef();
   const [closing, setClosing] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showWarning, setShowWarning] = useState(false);
 
@@ -44,46 +43,34 @@ const Modal = ({
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (groupName.trim() === "" || selectedColor === "") {
-      setSuccessMessage("");
+    if (!groupName.trim() || !selectedColor) {
       setErrorMessage("");
       setShowWarning(true);
       setTimeout(() => setShowWarning(false), 600);
       return;
     }
 
-    const normalizedGroupName = groupName
-      .trim()
-      .replace(/\s/g, "")
-      .toLowerCase();
+    const normalizedGroupName = groupName.trim().toLowerCase();
     const groupExists = groups.some(
-      (group) =>
-        group.name.trim().replace(/\s/g, "").toLowerCase() ===
-        normalizedGroupName
+      (group) => group.name.trim().toLowerCase() === normalizedGroupName
     );
 
     if (groupExists) {
-      setSuccessMessage("");
       setErrorMessage("Group name already exists!");
       setTimeout(() => setErrorMessage(""), 600);
     } else {
-      setErrorMessage("");
       setShowWarning(false);
-      setSuccessMessage("Group Added!");
+      setErrorMessage("");
       setClosing(true);
       setTimeout(() => {
         addGroup();
         setShowModal(false);
-        setSuccessMessage("");
       }, 700);
     }
   };
 
   return (
     <>
-      {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
       {errorMessage && (
         <div className={styles.errorMessage}>{errorMessage}</div>
       )}
@@ -94,7 +81,7 @@ const Modal = ({
         className={`${styles.modal} ${closing && styles.fadeOut}`}
         ref={modalRef}
       >
-        <form onSubmit={handleSubmit} ref={modalRef}>
+        <form onSubmit={handleSubmit}>
           <h2 className={styles.heading}>Create new group</h2>
           <label htmlFor="group-name" className={styles.groupName}>
             Group Name
