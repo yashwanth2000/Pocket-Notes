@@ -33,9 +33,14 @@ const NotesGroup = ({ setSelectedGroup }) => {
   }, []);
 
   const addGroup = () => {
-    const normalizedGroupName = groupName.trim().toLowerCase();
+    const normalizedGroupName = groupName
+      .trim()
+      .replace(/\s/g, "")
+      .toLowerCase();
     const groupExists = groups.some(
-      (group) => group.name.trim().toLowerCase() === normalizedGroupName
+      (group) =>
+        group.name.trim().replace(/\s/g, "").toLowerCase() ===
+        normalizedGroupName
     );
 
     if (groupName.trim() && selectedColor && !groupExists) {

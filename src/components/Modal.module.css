@@ -127,12 +127,12 @@
 
 .successMessage {
   background-color: #4caf50;
-  animation: fadeInOut 3s forwards;
+  animation: fadeInOut 1s forwards;
 }
 
 .errorMessage {
   background-color: #f44336;
-  animation: shake 0.2s forwards;
+  animation: shake 0.5s forwards;
 }
 
 .warningMessage {

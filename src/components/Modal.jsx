@@ -20,6 +20,7 @@ const Modal = ({
   ];
   const modalRef = useRef();
   const [closing, setClosing] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showWarning, setShowWarning] = useState(false);
 
@@ -44,33 +45,45 @@ const Modal = ({
     event.preventDefault();
 
     if (!groupName.trim() || !selectedColor) {
+      setSuccessMessage("");
       setErrorMessage("");
       setShowWarning(true);
-      setTimeout(() => setShowWarning(false), 600);
+      setTimeout(() => setShowWarning(false), 1000);
       return;
     }
 
-    const normalizedGroupName = groupName.trim().toLowerCase();
-    const groupExists = groups.some(
-      (group) => group.name.trim().toLowerCase() === normalizedGroupName
-    );
+    const normalizedGroupName = groupName
+    .trim()
+    .replace(/\s/g, "")
+    .toLowerCase();
+  const groupExists = groups.some(
+    (group) =>
+      group.name.trim().replace(/\s/g, "").toLowerCase() ===
+      normalizedGroupName
+  );
 
     if (groupExists) {
+      setSuccessMessage("");
       setErrorMessage("Group name already exists!");
-      setTimeout(() => setErrorMessage(""), 600);
+      setTimeout(() => setErrorMessage(""), 1000);
     } else {
-      setShowWarning(false);
       setErrorMessage("");
+      setShowWarning(false);
+      setSuccessMessage("Group Added!");
       setClosing(true);
       setTimeout(() => {
         addGroup();
         setShowModal(false);
-      }, 700);
+        setSuccessMessage("");
+      }, 1000);
     }
   };
 
   return (
     <>
+      {successMessage && (
+        <div className={styles.successMessage}>{successMessage}</div>
+      )}
       {errorMessage && (
         <div className={styles.errorMessage}>{errorMessage}</div>
       )}
