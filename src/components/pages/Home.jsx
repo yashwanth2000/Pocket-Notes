@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import NotesGroup, { getGroupInitials } from "./NotesGroup";
-import NotesArea from "./NotesArea";
-import notes from "../assets/notes.png";
-import lock from "../assets/lock.png";
+import NotesGroup, { getGroupInitials } from "../NotesGroup/NotesGroup.jsx";
+import NotesArea from "../NotesArea/NotesArea.jsx";
+import notes from "../../assets/notes.png";
+import lock from "../../assets/lock.png";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
   const handleResize = () => {
     const isSmall = window.innerWidth < 768;
     setIsSmallScreen(isSmall);
-    if (!isSmall) setSelectedGroup(null);
+    // if (!isSmall) setSelectedGroup(null);
   };
 
   useEffect(() => {

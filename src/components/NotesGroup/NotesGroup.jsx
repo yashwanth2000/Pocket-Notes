@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./Modal";
+import Modal from "../Modal/Modal.jsx";
 import styles from "./NotesGroup.module.css";
 
 export function getGroupInitials(name) {
-  if (name == null) {
-    throw new Error("Group name is null");
+  if (!name) {
+    throw new Error("Group name is null or empty");
   }
-  const initials = name
-    .trim()
-    .split(" ")
-    .map((word) => {
-      if (word == null) {
-        throw new Error("Group name contains null word");
-      }
-      return word.charAt(0).toUpperCase();
-    });
-  return initials.join("");
+
+  const words = name.trim().split(/\s+/);
+
+  if (words.length === 0) {
+    throw new Error("Group name contains no valid words");
+  }
+
+  return words.reduce((initials, word) => {
+    if (!word) {
+      throw new Error("Group name contains empty word");
+    }
+    return initials + word.charAt(0).toUpperCase();
+  }, "");
 }
+
 
 const NotesGroup = ({ setSelectedGroup }) => {
   const [showModal, setShowModal] = useState(false);

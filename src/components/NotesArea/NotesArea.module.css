@@ -55,7 +55,7 @@
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   padding: 1rem;
   margin: 1rem;
-  width: 60vw;
+  width: 90%;
   text-align: justify;
   color: #000;
   font-size: 1rem;
@@ -65,6 +65,7 @@
   word-wrap: break-word;
 }
 .editTextarea {
+  width: 80%;
   height: 150px;
   padding: 10px;
   font-size: 16px;
@@ -81,6 +82,7 @@
   border-color: #4d90fe;
   box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
 }
+
 .noteTimestamp {
   color: #353535;
   font-size: 12px;
@@ -115,6 +117,7 @@
   width: 30px;
   height: 30px;
 }
+
 .saveIcon,
 .editIcon,
 .deleteIcon{
@@ -123,15 +126,15 @@
 }
 
 .saveIcon:hover{
-  content: url("../assets/save.gif");
+  content: url("../../assets/save.gif");
 }
 
 .editIcon:hover{
-  content: url("../assets/edit.gif");
+  content: url("../../assets/edit.gif");
 }
 
 .deleteIcon:hover{
-  content: url("../assets/delete.gif");
+  content: url("../../assets/delete.gif");
 }
 
 @media (max-width: 768px) {

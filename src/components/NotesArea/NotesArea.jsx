@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./NotesArea.module.css";
-import arrow from "../assets/arrow.png";
-import arrow2 from "../assets/arrow2.png";
-import backBtn from "../assets/backBtn.png";
-import saveIcon from "../assets/static-save.png";
-import editIcon from "../assets/edit-static.png";
-import deleteIcon from "../assets/delete-static.png";
+import arrow from "../../assets/arrow.png";
+import arrow2 from "../../assets/arrow2.png";
+import backBtn from "../../assets/backBtn.png";
+import saveIcon from "../../assets/static-save.png";
+import editIcon from "../../assets/edit-static.png";
+import deleteIcon from "../../assets/delete-static.png";
 import { ToastContainer, toast, Zoom, Slide, Bounce } from 'react-toastify';
 
 const NotesArea = ({
@@ -139,6 +139,7 @@ const NotesArea = ({
 
   return (
     <div className={styles.noteContainer}>
+      <ToastContainer />
       <div className={styles.noteHeader}>
         {isSmallScreen && (
           <img
@@ -205,7 +206,7 @@ const NotesArea = ({
           />
         </div>
       </div>
-      <ToastContainer />
+      
     </div>
   );
 };
