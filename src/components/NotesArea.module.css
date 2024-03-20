@@ -64,7 +64,23 @@
   letter-spacing: 0.63px;
   word-wrap: break-word;
 }
+.editTextarea {
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+}
 
+.editTextarea:focus {
+  outline: none;
+  border-color: #4d90fe;
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+}
 .noteTimestamp {
   color: #353535;
   font-size: 12px;
@@ -98,6 +114,24 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
+}
+.saveIcon,
+.editIcon,
+.deleteIcon{
+  margin: 3px;
+  padding: 5px;
+}
+
+.saveIcon:hover{
+  content: url("../assets/save.gif");
+}
+
+.editIcon:hover{
+  content: url("../assets/edit.gif");
+}
+
+.deleteIcon:hover{
+  content: url("../assets/delete.gif");
 }
 
 @media (max-width: 768px) {

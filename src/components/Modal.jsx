@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { ToastContainer, toast , Zoom, Flip, Bounce }from "react-toastify";
 import styles from "./Modal.module.css";
 
 const Modal = ({
@@ -20,9 +21,6 @@ const Modal = ({
   ];
   const modalRef = useRef();
   const [closing, setClosing] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,51 +43,62 @@ const Modal = ({
     event.preventDefault();
 
     if (!groupName.trim() || !selectedColor) {
-      setSuccessMessage("");
-      setErrorMessage("");
-      setShowWarning(true);
-      setTimeout(() => setShowWarning(false), 1000);
+      toast.warn("Select both name and color!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "dark",
+        transition: Flip,
+      });
       return;
     }
 
     const normalizedGroupName = groupName
-    .trim()
-    .replace(/\s/g, "")
-    .toLowerCase();
-  const groupExists = groups.some(
-    (group) =>
-      group.name.trim().replace(/\s/g, "").toLowerCase() ===
-      normalizedGroupName
-  );
+      .trim()
+      .replace(/\s/g, "")
+      .toLowerCase();
+    const groupExists = groups.some(
+      (group) =>
+        group.name.trim().replace(/\s/g, "").toLowerCase() ===
+        normalizedGroupName
+    );
 
     if (groupExists) {
-      setSuccessMessage("");
-      setErrorMessage("Group name already exists!");
-      setTimeout(() => setErrorMessage(""), 1000);
+      toast.error("Group name already exists!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce
+      });
     } else {
-      setErrorMessage("");
-      setShowWarning(false);
-      setSuccessMessage("Group Added!");
+      toast.success("Group Added!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        theme: "dark",
+        transition : Zoom
+      });
       setClosing(true);
       setTimeout(() => {
         addGroup();
         setShowModal(false);
-        setSuccessMessage("");
       }, 1000);
     }
   };
 
   return (
     <>
-      {successMessage && (
-        <div className={styles.successMessage}>{successMessage}</div>
-      )}
-      {errorMessage && (
-        <div className={styles.errorMessage}>{errorMessage}</div>
-      )}
-      {showWarning && (
-        <div className={styles.warningMessage}>Select both name and color!</div>
-      )}
+      <ToastContainer />
       <div
         className={`${styles.modal} ${closing && styles.fadeOut}`}
         ref={modalRef}
