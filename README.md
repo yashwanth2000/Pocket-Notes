@@ -13,7 +13,7 @@ Whether you're a student, professional, or just someone who values organization,
 Before getting started, ensure you have Node.js and npm installed on your machine.
 
 # Clone the repository
-git clone https://github.com/your-repo/pocket-notes.git
+git clone https://github.com/yashwanth2000/pocket-notes.git
 
 # Navigate to the project directory
 cd pocket-notes
