@@ -30,6 +30,3 @@ npm start
 - Choose a color and name for your note category.
 - Begin writing your notes in the designated section.
 - Edit or update your notes as needed.
-
-
-- Feel free to customize this template further to fit the specific needs and style of your project!
